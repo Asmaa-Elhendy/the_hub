@@ -29,102 +29,104 @@ class _ScanAndDisplayState extends State<ScanAndDisplay> {
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
     double height=MediaQuery.of(context).size.height;
-    return GestureDetector(
-        onTap: () {
-      FocusScopeNode currentFocus;
-      currentFocus = FocusScope.of(context);
-      if (!currentFocus.hasPrimaryFocus) {
-        currentFocus.unfocus();
-      }},
-      child:  Scaffold(
-       //   drawer: DrawerPage(themeController:themecontroller),
-          appBar: AppBar(
-            title: Text('Add to good receipt'),
-            actions: [
-              InkWell(onTap: (){Alert(context,width,height,widget.theme);},
-                child: CircleAvatar(
-                  radius: width*.06,
-                  backgroundColor: Colors.grey[350],
-                  child: Icon(Icons.person,color: Colors.white,size: width*.1,),
-                ),
-              )
-            ],
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  width: width,
-                  height: height*.15,
-                  color: widget.theme.primaryColor,
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding:  EdgeInsets.symmetric(vertical:height*.04,horizontal: width*.05),
-                        child: Container(
-                          width: width*.9,
-                          height: height*.09,
-                          color: Colors.white,
-                          child:  TextField(
-                            controller: textcontroller,
-                            textAlignVertical: TextAlignVertical.center,
-                            style: TextStyle(overflow: TextOverflow.visible,fontSize: width*.045),
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.search),
-                              border: InputBorder.none,
-                              hintText: "Enter Product Name/SKU/Scan bar code",
-                              hintStyle: TextStyle(color: Colors.grey,fontSize: width*.032),
-                              //  contentPadding: EdgeInsets.all(5),
-                              suffixIcon: InkWell(
-                                onTap: ()async{
-                                  String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-                                      "#ff6666",
-                                      "CANCEL",
-                                      false,
-                                      ScanMode.BARCODE);
-                                  if(!mounted) return;
-                                  setState(() {
-                                    var value= barcodeScanRes;
-                                    print("asmaa ${value}");
-                                  });
-                                },
-                                child: Image.asset("assets/images/barcodenew.png",),
+    return SafeArea(
+      child: GestureDetector(
+          onTap: () {
+        FocusScopeNode currentFocus;
+        currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }},
+        child:  Scaffold(
+         //   drawer: DrawerPage(themeController:themecontroller),
+            appBar: AppBar(
+              title: Text('Add to good receipt'),
+              actions: [
+                InkWell(onTap: (){Alert(context,width,height,widget.theme);},
+                  child: CircleAvatar(
+                    radius: width*.06,
+                    backgroundColor: Colors.grey[350],
+                    child: Icon(Icons.person,color: Colors.white,size: width*.1,),
+                  ),
+                )
+              ],
+            ),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    width: width,
+                    height: height*.15,
+                    color: widget.theme.primaryColor,
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.symmetric(vertical:height*.04,horizontal: width*.05),
+                          child: Container(
+                            width: width*.9,
+                            height: height*.09,
+                            color: Colors.white,
+                            child:  TextField(
+                              controller: textcontroller,
+                              textAlignVertical: TextAlignVertical.center,
+                              style: TextStyle(overflow: TextOverflow.visible,fontSize: width*.045),
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.search),
+                                border: InputBorder.none,
+                                hintText: "Enter Product Name/SKU/Scan bar code",
+                                hintStyle: TextStyle(color: Colors.grey,fontSize: width*.032),
+                                //  contentPadding: EdgeInsets.all(5),
+                                suffixIcon: InkWell(
+                                  onTap: ()async{
+                                    String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                                        "#ff6666",
+                                        "CANCEL",
+                                        false,
+                                        ScanMode.BARCODE);
+                                    if(!mounted) return;
+                                    setState(() {
+                                      var value= barcodeScanRes;
+                                      print("asmaa ${value}");
+                                    });
+                                  },
+                                  child: Image.asset("assets/images/barcodenew.png",),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height:height*.71,
-                  child: ListView.builder(
-                      itemCount: items.length+1,
-                      itemBuilder: (context,int index){
-                        if(index==items.length){
-                          return  Center(
-                            child: Row(mainAxisSize: MainAxisSize.min,
-                              children: [
-                                MaterialButton(onPressed: () {
+                  SizedBox(height:height*.71,
+                    child: ListView.builder(
+                        itemCount: items.length+1,
+                        itemBuilder: (context,int index){
+                          if(index==items.length){
+                            return  Center(
+                              child: Row(mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  MaterialButton(onPressed: () {
 
 
-                                },minWidth: width*.5,
-                                  child: const Text('save',style: TextStyle(color: Colors.white,fontSize: 17),),
-                                  color:widget.theme.backgroundColor,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                        return CustomItemCard(item:items[index],selected_theme: widget.theme,);
+                                  },minWidth: width*.5,
+                                    child: const Text('save',style: TextStyle(color: Colors.white,fontSize: 17),),
+                                    color:widget.theme.backgroundColor,
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                          return CustomItemCard(item:items[index],selected_theme: widget.theme,);
 
-                      }),)
-              ],
+                        }),)
+                ],
+              ),
             ),
-          ),
-        )
+          )
 
+      ),
     );
   }
 }

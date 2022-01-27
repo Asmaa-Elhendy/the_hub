@@ -5,15 +5,28 @@ import 'package:get_storage/get_storage.dart';
 import 'package:the_hub/controller/local_storage.dart';
 import 'package:the_hub/controller/theme_controller.dart';
 import 'package:the_hub/view/screens/good_receipt_note_screens.dart';
+import 'package:the_hub/view/screens/login.dart';
 import 'package:the_hub/view/screens/scan_and_display.dart';
 import 'package:the_hub/view/widgets/themes.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  //SharedPreferences prefrences = await  SharedPreferences.getInstance();
   await GetStorage.init();
-  runApp( MyApp());
+  GetStorage storage =GetStorage();
+  var exist = await storage.read("token");
+ // var exist = prefrences.getString("token");
+
+
+  await GetStorage.init();
+  runApp( MyApp(exist));
 }
 
 class MyApp extends StatelessWidget {
+  var exist;
+  MyApp(this.exist);
+
+
 
 GetStorage storage=GetStorage();
 ThemeController themecontroller= Get.put(ThemeController());
@@ -43,7 +56,8 @@ ThemeController themecontroller= Get.put(ThemeController());
 
             ),
           ),
-          nextScreen: GoodReceiptNote(),
+          nextScreen:exist == null || exist =="0"?Login(theme: themeData):GoodReceiptNote(),
+          //exist!="0"?GoodReceiptNote() :Login(theme: themeData,),
           splashTransition: SplashTransition.fadeTransition,
           //pageTransitionType: PageTransition,
           backgroundColor: Colors.white,
