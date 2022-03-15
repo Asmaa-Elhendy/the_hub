@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:the_hub/controller/local_storage.dart';
 import 'package:the_hub/controller/login_controller.dart';
 import 'package:the_hub/controller/theme_controller.dart';
+import 'package:the_hub/view/screens/inventory.dart';
 import 'package:the_hub/view/screens/login.dart';
 import 'package:the_hub/view/widgets/themes.dart';
 
@@ -123,6 +124,31 @@ class DrawerPage extends StatelessWidget {
           ),
           const Divider(
             thickness: 2,
+          ),
+          SizedBox(
+            height: height * 0.01,
+          ),
+          TextButton(
+
+            onPressed: (){
+         Get.to(Inventory(theme: themeController.selectedTheme));
+            },
+            child: RichText(
+                text: const TextSpan(children: [
+                  WidgetSpan(child: Icon(Icons.inventory,size: 20,)),
+                  TextSpan(
+                    text: "    Inventory ",
+
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
+
+                  ),
+                  TextSpan(
+                    text: "     closed",
+
+                    style: TextStyle(fontSize: 15, color: Colors.red),
+
+                  ),
+                ])),
           ),
           SizedBox(
             height: height * 0.01,

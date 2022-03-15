@@ -14,7 +14,7 @@ ThemeData theme;
 }
 
 class _ScanAndDisplayState extends State<ScanAndDisplay> {
-
+ String barcodevalue='-1';
  TextEditingController textcontroller=TextEditingController();
  LocalStorage localStorage=LocalStorage();
   List<Item> items=[
@@ -86,6 +86,8 @@ class _ScanAndDisplayState extends State<ScanAndDisplay> {
                                     if(!mounted) return;
                                     setState(() {
                                       var value= barcodeScanRes;
+                                      barcodevalue=barcodeScanRes;
+                                 barcodevalue=='-1'?textcontroller.text='': textcontroller.text=barcodevalue;
                                       print("asmaa ${value}");
                                     });
                                   },
