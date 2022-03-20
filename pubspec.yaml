@@ -75,6 +75,7 @@ flutter:
     - assets/images/logo-horz.png
     - assets/images/zip-code.png
     - assets/images/earth.png
+    - assets/images/delivery-app-svg-clipart-md.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

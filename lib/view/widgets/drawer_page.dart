@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:the_hub/controller/local_storage.dart';
 import 'package:the_hub/controller/login_controller.dart';
 import 'package:the_hub/controller/theme_controller.dart';
+import 'package:the_hub/view/screens/good_receipt_note_screens.dart';
 import 'package:the_hub/view/screens/inventory.dart';
 import 'package:the_hub/view/screens/login.dart';
 import 'package:the_hub/view/widgets/themes.dart';
@@ -54,76 +55,98 @@ class DrawerPage extends StatelessWidget {
           SizedBox(
             height: height * 0.01,
           ),
-          Padding(
-            padding:  EdgeInsets.only(left: width*0.03),
-            child: const Text(
-              "  Change Themes",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-            ),
+          TextButton(
+
+            onPressed: (){   Navigator.pop(context);
+              Get.to(GoodReceiptNote());
+
+            },
+            child: RichText(
+                text:  TextSpan(children: [
+                  WidgetSpan(child: SizedBox(width: width*.03,)),
+                  WidgetSpan(child: Icon(Icons.add,size: 20,)),
+                  WidgetSpan(child: SizedBox(width: width*.07,)),
+                  TextSpan(
+                    text: "Good Receipt Note",
+
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
+
+                  ),
+                ])),
           ),
           SizedBox(
             height: height * 0.01,
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.format_paint,
-              color: Colors.blue,
-            ),
-            title: const Text('blue',
-                style: TextStyle(fontSize: 16, color: Colors.blue)),
-            onTap: () {
-              Get.changeTheme(blue);
-              themeController.toggleTheme(blue);
-              localStorage.saveToDisk('blue');
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.format_paint,
-              color: Colors.pink,
-            ),
-            title: const Text(
-              'pink',
-              style: TextStyle(fontSize: 16, color: Colors.pink),
-            ),
-            onTap: () {
-              Get.changeTheme(pink);
-              themeController.toggleTheme(pink);
-              localStorage.saveToDisk('pink');
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.format_paint,
-              color: Colors.green,
-            ),
-            title: const Text(
-              'green',
-              style: TextStyle(fontSize: 16, color: Colors.green),
-            ),
-            onTap: () {
-              Get.changeTheme(green);
-              themeController.toggleTheme(green);
-              localStorage.saveToDisk('green');
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.format_paint,
-              color: Colors.red[600],
-            ),
-            title: Text(
-              'red',
-              style: TextStyle(fontSize: 16, color: Colors.red[600]),
-            ),
-            onTap: () {
-              Get.changeTheme(red);
-              themeController.toggleTheme(red);
-              localStorage.saveToDisk('red');
-            },
-          ),
-          const Divider(
-            thickness: 2,
+    ExpansionTile(
+    title:  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Icon(Icons.color_lens,color: themeController.selectedTheme.backgroundColor,),
+        Text('Change Themes',style: TextStyle(fontSize: 18 ,fontWeight: FontWeight.w500,color: Colors.black),)
+      ],
+    ),children: [
+      ListTile(
+        leading: const Icon(
+          Icons.format_paint,
+          color: Colors.blue,
+        ),
+        title: const Text('blue',
+            style: TextStyle(fontSize: 16, color: Colors.blue)),
+        onTap: () {
+          Get.changeTheme(blue);
+          themeController.toggleTheme(blue);
+          localStorage.saveToDisk('blue');
+        },
+      ),
+      ListTile(
+        leading: const Icon(
+          Icons.format_paint,
+          color: Colors.pink,
+        ),
+        title: const Text(
+          'pink',
+          style: TextStyle(fontSize: 16, color: Colors.pink),
+        ),
+        onTap: () {
+          Get.changeTheme(pink);
+          themeController.toggleTheme(pink);
+          localStorage.saveToDisk('pink');
+        },
+      ),
+      ListTile(
+        leading: const Icon(
+          Icons.format_paint,
+          color: Colors.green,
+        ),
+        title: const Text(
+          'green',
+          style: TextStyle(fontSize: 16, color: Colors.green),
+        ),
+        onTap: () {
+          Get.changeTheme(green);
+          themeController.toggleTheme(green);
+          localStorage.saveToDisk('green');
+        },
+      ),
+      ListTile(
+        leading: Icon(
+          Icons.format_paint,
+          color: Colors.red[600],
+        ),
+        title: Text(
+          'red',
+          style: TextStyle(fontSize: 16, color: Colors.red[600]),
+        ),
+        onTap: () {
+          Get.changeTheme(red);
+          themeController.toggleTheme(red);
+          localStorage.saveToDisk('red');
+        },
+      ),
+    ],
+            // child: Padding(
+            //   padding:  EdgeInsets.only(left: width*0.03),
+            //   child:
+            // ),
           ),
           SizedBox(
             height: height * 0.01,
@@ -131,13 +154,16 @@ class DrawerPage extends StatelessWidget {
           TextButton(
 
             onPressed: (){
+              Navigator.pop(context);
          Get.to(Inventory(theme: themeController.selectedTheme));
             },
             child: RichText(
-                text: const TextSpan(children: [
+                text:  TextSpan(children: [
+                  WidgetSpan(child: SizedBox(width: width*.02,)),
                   WidgetSpan(child: Icon(Icons.inventory,size: 20,)),
+                  WidgetSpan(child: SizedBox(width: width*.1,)),
                   TextSpan(
-                    text: "    Inventory ",
+                    text: "Inventory ",
 
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
 
@@ -157,7 +183,7 @@ class DrawerPage extends StatelessWidget {
 
             onPressed: (){
               //try{
-
+              Navigator.pop(context);
               Helper.logout();
 
               storage.write("token", "0");
@@ -175,10 +201,12 @@ class DrawerPage extends StatelessWidget {
             //   }
     },
             child: RichText(
-                text: const TextSpan(children: [
-              WidgetSpan(child: Icon(Icons.logout,size: 20,)),
+                text:  TextSpan(children: [
+                  WidgetSpan(child: SizedBox(width: width*.02,)),
+                  WidgetSpan(child: Icon(Icons.logout,size: 20,)),
+                  WidgetSpan(child: SizedBox(width: width*.1,)),
               TextSpan(
-                text: "    Logout ",
+                text: "Logout ",
 
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
 

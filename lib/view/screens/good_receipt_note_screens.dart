@@ -3,6 +3,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:the_hub/controller/exper_api.dart';
+import 'package:the_hub/controller/supplier_controller.dart';
 import 'package:the_hub/controller/theme_controller.dart';
 import 'package:the_hub/view/screens/scan_and_display.dart';
 import 'package:the_hub/view/widgets/businesslocation_dropbox.dart';
@@ -25,9 +27,22 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
 
   var _formkey = GlobalKey<FormState>();
   String _fileName = '...';
+  List<String>  businessLocationsNames=[];
 
 
+  getbusinessLocationName()async{
+   List<String>  business_locations_names=  await  ExperApi.GetBusinessLocationsNames();
+   businessLocationsNames=business_locations_names;
+     setState(() {
 
+     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  getbusinessLocationName();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +65,7 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
           init: ThemeController(),
           builder:(themecontroller){
             return Scaffold(
-              drawer: DrawerPage(themeController:themecontroller ,),
+        //      drawer: DrawerPage(themeController:themecontroller ,),
               appBar: AppBar(
                 titleSpacing: width*.02,
                 title: Image.asset("assets/images/logo1.png",
@@ -137,7 +152,7 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                           ],
                                         ),
                                       ),
-                                      BusinessLocatioDropBox(),
+                                      BusinessLocatioDropBox(business_locations_names: businessLocationsNames,),
                                       SizedBox(height: height * .025,),
                                       Text("Purchase Order: ",
                                         style: TextStyle(

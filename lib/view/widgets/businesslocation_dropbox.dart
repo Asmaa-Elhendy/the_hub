@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BusinessLocatioDropBox extends StatefulWidget {
-  const BusinessLocatioDropBox({Key? key}) : super(key: key);
+ List<String> business_locations_names;
+ BusinessLocatioDropBox({required this.business_locations_names});
 
   @override
   _BusinessLocatioDropBoxState createState() => _BusinessLocatioDropBoxState();
@@ -50,7 +51,7 @@ class _BusinessLocatioDropBoxState extends State<BusinessLocatioDropBox> {
               initialValue = value!;
             });
           },
-          items: items.map((String value) {
+          items: widget.business_locations_names.map((String value) {      //items.map((String value) {
             return  DropdownMenuItem<String>(
               value: value,
               child: Text(value.toString()),

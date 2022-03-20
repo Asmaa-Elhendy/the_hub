@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:the_hub/controller/supplier_controller.dart';
+import 'package:the_hub/model/supplier_model.dart';
 import 'package:the_hub/view/screens/add_new_contact.dart';
 
 class SupplierDropbox extends StatefulWidget {
   ThemeData theme;
-   SupplierDropbox({Key? key,required this.theme}) : super(key: key);
+  SupplierDropbox({Key? key,required this.theme}) : super(key: key);
 
   @override
   _SupplierDropboxState createState() => _SupplierDropboxState();
@@ -14,20 +16,31 @@ class SupplierDropbox extends StatefulWidget {
 class _SupplierDropboxState extends State<SupplierDropbox> {
 
   TextEditingController _supplierController = TextEditingController();
+  List items =[];
+  // getSuppliers_names();
+
+  @override
+  void initState() {
+    super.initState();
+    SupplierHelper.getSupplier();
+    // items = getSuppliers_names();
+
+  }
   @override
   Widget build(BuildContext context) {
-    var items = [
-      'pepsi',
-      'Almarai',
-      'juhayna ',
-      'cocacola13##4',
-      '12345678910',
-    ];
+
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return
       TypeAheadFormField(
         textFieldConfiguration: TextFieldConfiguration(
+          onTap: (){
+            SupplierHelper.getSupplier();
+            setState(() {
+              items = getSuppliers_names();
+
+            });
+          },
           controller: _supplierController,
           keyboardType: TextInputType.multiline,
           decoration: InputDecoration(
@@ -48,7 +61,7 @@ class _SupplierDropboxState extends State<SupplierDropbox> {
 
               prefixIcon: Container(
                 margin: EdgeInsets.only(right: 8),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(right: BorderSide(color: Colors.grey)),
                 ),
                 child: Icon(
@@ -64,10 +77,10 @@ class _SupplierDropboxState extends State<SupplierDropbox> {
                 ),
                 child: IconButton(
                   icon:
-                 Icon (Icons.add_circle,
-                   color: widget.theme.backgroundColor,
-                   size: MediaQuery.of(context).size.width * 0.05,
-                 ),
+                  Icon (Icons.add_circle,
+                    color: widget.theme.backgroundColor,
+                    size: MediaQuery.of(context).size.width * 0.05,
+                  ),
                   onPressed: () {
                     Get.to(AddNewContact(theme :widget.theme));
                     // Navigator.push(
@@ -84,12 +97,12 @@ class _SupplierDropboxState extends State<SupplierDropbox> {
           return items.where((element) =>
               element.toLowerCase().contains(pattern.toLowerCase()));
         },
-        itemBuilder: (_, String ittem) => ListTile(
-          title: Text(ittem),
+        itemBuilder: (_, ittem) => ListTile(
+          title: Text(ittem.toString()),
         ),
-        onSuggestionSelected: (String val) {
+        onSuggestionSelected: ( val) {
           setState(() {
-            this._supplierController.text = val ;
+            this._supplierController.text = val.toString() ;
           });
         },
         getImmediateSuggestions: true,
@@ -100,5 +113,13 @@ class _SupplierDropboxState extends State<SupplierDropbox> {
           }
         },
       );
+  }
+
+  List getSuppliers_names() {
+    List items =[];
+    for(int i=0;i<SupplierHelper.suppliers.length;i++){
+      items.add(SupplierHelper.suppliers[i].name);
+    }
+    return items;
   }
 }

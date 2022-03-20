@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:the_hub/controller/supplier_controller.dart';
+import 'package:the_hub/view/screens/good_receipt_note_screens.dart';
 
-Alert(BuildContext context, double width, double height) {
+Alert(BuildContext context, double width, double height,{String? mobile,
+  String? alternateContactNumber,
+
+  String? landLiner,
+  String? email,
+  String? shippingAddress,
+  String? tax,
+  String? openingBalance,
+  String? address_1,
+  String? address_2,
+  String?city,
+  String?state,
+  String?country,
+  String?zip_Or_postal,
+  String?pay_term_type}) {
   showDialog(
       context: context,
       builder: (context) {
@@ -36,7 +52,26 @@ Alert(BuildContext context, double width, double height) {
                       height: height * .045,
                       child: ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            SupplierHelper.addSupplier(
+                                zip_Or_postal: zip_Or_postal,
+                                state: state,
+                                country: country,
+                                city: city,
+                                email: email,
+                                mobile: mobile,
+                                address1: address_1,
+                                address2: address_2,
+                                alternate_number: alternateContactNumber,
+                                landline: landLiner,
+                                opening_balance: openingBalance,
+                                pay_term: pay_term_type,
+                                shipping_address: shippingAddress,
+                                tax_number: tax
+                            );
+                            //Navigator.of(context).pop();
+                            SupplierHelper.getSupplier();
+                            Navigator.pushReplacement(
+                                context, MaterialPageRoute(builder: (BuildContext context) => GoodReceiptNote()));
                           },
                           child: const Text(
                             'Add',

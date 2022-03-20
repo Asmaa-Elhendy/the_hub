@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:the_hub/controller/supplier_controller.dart';
 import 'package:the_hub/view/screens/additonal_newcontact_data.dart';
 
 import 'confirmation_alert_widget.dart';
@@ -9,9 +10,30 @@ class ButtonsWidgets{
   var width;
   var height;
   ThemeData theme;
-  ButtonsWidgets({required this.width, required this.height, required this.context,required this.val,required this.theme});
 
-  Widget saveButton({formKey1,formKey2}){
+  ButtonsWidgets({
+    required this.width, required this.height, required this.context,required this.val,
+    required this.theme
+  });
+
+  Widget saveButton({formKey1,formKey2,
+    String? mobile,
+  String? alternateContactNumber,
+
+  String? landLiner,
+  String? email,
+  String? shippingAddress,
+  String? tax,
+  String? openingBalance,
+  String? address_1,
+  String? address_2,
+    String?city,
+    String?state,
+    String?country,
+    String?zip_Or_postal,
+    String?pay_term_type
+
+  }){
 
     return Container(
       width: width*0.43,
@@ -26,6 +48,23 @@ class ButtonsWidgets{
             )),
 
         onPressed: (){
+          print("in button issss$email,$landLiner,$zip_Or_postal,$country,$mobile,$alternateContactNumber,$shippingAddress,");
+          // SupplierHelper.addSupplier(
+          //   zip_Or_postal: zip_Or_postal,
+          //   state: state,
+          //    country: country,
+          //   city: city,
+          //   email: email,
+          //   mobile: mobile,
+          //   address1: address_1,
+          //   address2: address_2,
+          //   alternate_number: alternateContactNumber,
+          //    landline: landLiner,
+          //   opening_balance: openingBalance,
+          //   pay_term: pay_term_type,
+          //   shipping_address: shippingAddress,
+          //   tax_number: tax
+          // );
           // checkValidate(){
           //    {
           //     // print(emailController.text);
@@ -33,11 +72,21 @@ class ButtonsWidgets{
             //}
           if(val){
             if (formKey1.currentState.validate()&&formKey2.currentState.validate()){
-              Alert(context,width,height );
+              //Alert(context,width,height );
+              Alert(
+                  context,width,height,openingBalance: openingBalance,pay_term_type: pay_term_type,zip_Or_postal: zip_Or_postal,
+                  state: state,country: country,city: city,tax: tax,address_2: address_2,address_1: address_1,landLiner: landLiner,
+                  shippingAddress: shippingAddress,alternateContactNumber: alternateContactNumber,email: email,mobile: mobile
+              );
             }
           }
-             else
-          Alert(context,width,height );
+             else {
+            Alert(
+              context,width,height,openingBalance: openingBalance,pay_term_type: pay_term_type,zip_Or_postal: zip_Or_postal,
+            state: state,country: country,city: city,tax: tax,address_2: address_2,address_1: address_1,landLiner: landLiner,
+            shippingAddress: shippingAddress,alternateContactNumber: alternateContactNumber,email: email,mobile: mobile
+          );
+          }
         }, child: Text("Save",
 
           style: TextStyle(
@@ -47,7 +96,13 @@ class ButtonsWidgets{
     );
 
   }
-  Widget moreInfoButton({formKey1,formKey2}){
+  Widget moreInfoButton({formKey1,formKey2,
+    String? mobile,
+    String? alternateContactNumber,
+    String? landLiner,
+    String? email,
+    String? shippingAddress,
+  }){
     return Container(
       width: width*0.43,
       height: height * 0.08,
@@ -66,7 +121,18 @@ class ButtonsWidgets{
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => AdditionalNewContactData(theme:theme)),
+                    builder: (context) => AdditionalNewContactData(theme:theme,
+                      // mobile: mobile!=null?mobile:null,
+                      // alternativeNum: alternativeNum!=null?alternativeNum:null,
+                      // email: email,
+                      // landline: landline,
+                      // shippngAddress: shippngAddress,
+                      mobile: mobile,
+                      alternativeNum: alternateContactNumber,
+                      shippngAddress: shippingAddress,
+                      landline: landLiner,
+                      email: email,
+                    )),
               );
             }
 

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:the_hub/view/screens/additonal_newcontact_data.dart';
 
 class PayTermDropBox extends StatefulWidget {
-  const PayTermDropBox({Key? key}) : super(key: key);
+  static String selectedValue ="";
+  Function update;
+
+  static updateFunc(){
+  AdditionalNewContactData.selectedValue.value = selectedValue;
+}
+   PayTermDropBox({required this.update });
 
   @override
   _PayTermDropBoxState createState() => _PayTermDropBoxState();
 }
 
 class _PayTermDropBoxState extends State<PayTermDropBox> {
-  String? _selectedValue;
+
 
   var items = [
     'Item 1',
@@ -37,7 +44,7 @@ class _PayTermDropBoxState extends State<PayTermDropBox> {
               ),
             child:Center(
               child: Text(
-                _selectedValue == null?"Pay Term":"$_selectedValue"
+                  PayTermDropBox.selectedValue == null?"Pay Term":"${PayTermDropBox.selectedValue}"
               ),
             )
              // _selectedValue == null?Center(child: Text("pay term")):Text(_selectedValue!),
@@ -72,7 +79,11 @@ class _PayTermDropBoxState extends State<PayTermDropBox> {
 
                         onChanged: ( value){
                           setState(() {
-                            _selectedValue = value!;
+                            PayTermDropBox.selectedValue = value!;
+                            AdditionalNewContactData.selectedValue.value =PayTermDropBox.selectedValue;
+                            PayTermDropBox.updateFunc();
+                            widget.update;
+                            print("here is ${AdditionalNewContactData.selectedValue.value}");
                           });
                         },
                         items: items.map((String value) {
