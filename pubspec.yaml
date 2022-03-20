@@ -44,6 +44,8 @@ dependencies:
   path_provider: ^2.0.4
   email_validator: ^2.0.1
   http: ^0.13.4
+  shared_preferences: ^2.0.6
+
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +77,8 @@ flutter:
     - assets/images/logo-horz.png
     - assets/images/zip-code.png
     - assets/images/earth.png
+    - assets/images/storekeeper-clipart-md.png
+    - assets/images/man-moving-boxes-clipart-md.png
     - assets/images/delivery-app-svg-clipart-md.png
   #   - images/a_dot_ham.jpeg
 

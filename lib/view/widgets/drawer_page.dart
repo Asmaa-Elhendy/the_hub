@@ -36,15 +36,15 @@ class DrawerPage extends StatelessWidget {
             padding: EdgeInsets.only(
                 top: height * .06, left: width * .03, bottom: height * .04),
             child:  RichText(
-              text:const TextSpan(
-                children: [
-                  WidgetSpan(child: Icon(Icons.settings,size: 20,color: Colors.black54,)),
-                  TextSpan(
-                    text: '  Settings  ',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black),
-                  )
-                ]
-              )
+                text:const TextSpan(
+                    children: [
+                      WidgetSpan(child: Icon(Icons.settings,size: 20,color: Colors.black54,)),
+                      TextSpan(
+                        text: '  Settings  ',
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black),
+                      )
+                    ]
+                )
 
 
             ),
@@ -58,18 +58,18 @@ class DrawerPage extends StatelessWidget {
           TextButton(
 
             onPressed: (){   Navigator.pop(context);
-              Get.to(GoodReceiptNote());
+            Get.to(GoodReceiptNote());
 
             },
             child: RichText(
                 text:  TextSpan(children: [
-                  WidgetSpan(child: SizedBox(width: width*.03,)),
-                  WidgetSpan(child: Icon(Icons.add,size: 20,)),
-                  WidgetSpan(child: SizedBox(width: width*.07,)),
+                  WidgetSpan(child: SizedBox(width: width*.02,)),
+                  WidgetSpan(child: Icon(Icons.add,size: width*.06,)),
+                  WidgetSpan(child: SizedBox(width: width*.06,)),
                   TextSpan(
                     text: "Good Receipt Note",
 
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
+                    style: TextStyle(fontSize: width*0.05, fontWeight: FontWeight.w500,color: Colors.black),
 
                   ),
                 ])),
@@ -77,72 +77,73 @@ class DrawerPage extends StatelessWidget {
           SizedBox(
             height: height * 0.01,
           ),
-    ExpansionTile(
-    title:  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Icon(Icons.color_lens,color: themeController.selectedTheme.backgroundColor,),
-        Text('Change Themes',style: TextStyle(fontSize: 18 ,fontWeight: FontWeight.w500,color: Colors.black),)
-      ],
-    ),children: [
-      ListTile(
-        leading: const Icon(
-          Icons.format_paint,
-          color: Colors.blue,
-        ),
-        title: const Text('blue',
-            style: TextStyle(fontSize: 16, color: Colors.blue)),
-        onTap: () {
-          Get.changeTheme(blue);
-          themeController.toggleTheme(blue);
-          localStorage.saveToDisk('blue');
-        },
-      ),
-      ListTile(
-        leading: const Icon(
-          Icons.format_paint,
-          color: Colors.pink,
-        ),
-        title: const Text(
-          'pink',
-          style: TextStyle(fontSize: 16, color: Colors.pink),
-        ),
-        onTap: () {
-          Get.changeTheme(pink);
-          themeController.toggleTheme(pink);
-          localStorage.saveToDisk('pink');
-        },
-      ),
-      ListTile(
-        leading: const Icon(
-          Icons.format_paint,
-          color: Colors.green,
-        ),
-        title: const Text(
-          'green',
-          style: TextStyle(fontSize: 16, color: Colors.green),
-        ),
-        onTap: () {
-          Get.changeTheme(green);
-          themeController.toggleTheme(green);
-          localStorage.saveToDisk('green');
-        },
-      ),
-      ListTile(
-        leading: Icon(
-          Icons.format_paint,
-          color: Colors.red[600],
-        ),
-        title: Text(
-          'red',
-          style: TextStyle(fontSize: 16, color: Colors.red[600]),
-        ),
-        onTap: () {
-          Get.changeTheme(red);
-          themeController.toggleTheme(red);
-          localStorage.saveToDisk('red');
-        },
-      ),
-    ],
+          ExpansionTile(
+            title:  Row(
+              children: [
+                Icon(Icons.color_lens,color: themeController.selectedTheme.backgroundColor,),
+                SizedBox(width: width*.063,),
+                Text('Change Themes',style: TextStyle(fontSize: width*0.05 ,fontWeight: FontWeight.w500,color: Colors.black),)
+              ],
+            ),children: [
+            ListTile(
+              leading: const Icon(
+                Icons.format_paint,
+                color: Colors.blue,
+              ),
+              title: const Text('blue',
+                  style: TextStyle(fontSize: 16, color: Colors.blue)),
+              onTap: () {
+                Get.changeTheme(blue);
+                themeController.toggleTheme(blue);
+                localStorage.saveToDisk('blue');
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.format_paint,
+                color: Colors.pink,
+              ),
+              title: const Text(
+                'pink',
+                style: TextStyle(fontSize: 16, color: Colors.pink),
+              ),
+              onTap: () {
+                Get.changeTheme(pink);
+                themeController.toggleTheme(pink);
+                localStorage.saveToDisk('pink');
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.format_paint,
+                color: Colors.green,
+              ),
+              title: const Text(
+                'green',
+                style: TextStyle(fontSize: 16, color: Colors.green),
+              ),
+              onTap: () {
+                Get.changeTheme(green);
+                themeController.toggleTheme(green);
+                localStorage.saveToDisk('green');
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.format_paint,
+                color: Colors.red[600],
+              ),
+              title: Text(
+                'red',
+                style: TextStyle(fontSize: 16, color: Colors.red[600]),
+              ),
+              onTap: () {
+                Get.changeTheme(red);
+                themeController.toggleTheme(red);
+                localStorage.saveToDisk('red');
+              },
+            ),
+          ],
             // child: Padding(
             //   padding:  EdgeInsets.only(left: width*0.03),
             //   child:
@@ -155,17 +156,17 @@ class DrawerPage extends StatelessWidget {
 
             onPressed: (){
               Navigator.pop(context);
-         Get.to(Inventory(theme: themeController.selectedTheme));
+              Get.to(Inventory(theme: themeController.selectedTheme));
             },
             child: RichText(
                 text:  TextSpan(children: [
-                  WidgetSpan(child: SizedBox(width: width*.02,)),
+                  WidgetSpan(child: SizedBox(width: width*.027,)),
                   WidgetSpan(child: Icon(Icons.inventory,size: 20,)),
-                  WidgetSpan(child: SizedBox(width: width*.1,)),
+                  WidgetSpan(child: SizedBox(width: width*.08,)),
                   TextSpan(
                     text: "Inventory ",
 
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
+                    style: TextStyle(fontSize: width*.05, fontWeight: FontWeight.w500,color: Colors.black),
 
                   ),
                   TextSpan(
@@ -196,22 +197,22 @@ class DrawerPage extends StatelessWidget {
 
 
 
-            //}catch(e){
-            //     print("errorrr $e");
-            //   }
-    },
+              //}catch(e){
+              //     print("errorrr $e");
+              //   }
+            },
             child: RichText(
                 text:  TextSpan(children: [
-                  WidgetSpan(child: SizedBox(width: width*.02,)),
+                  WidgetSpan(child: SizedBox(width: width*.027,)),
                   WidgetSpan(child: Icon(Icons.logout,size: 20,)),
-                  WidgetSpan(child: SizedBox(width: width*.1,)),
-              TextSpan(
-                text: "Logout ",
+                  WidgetSpan(child: SizedBox(width: width*.08,)),
+                  TextSpan(
+                    text: "Logout ",
 
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black),
+                    style: TextStyle(fontSize: width*.05, fontWeight: FontWeight.w500,color: Colors.black),
 
-              ),
-            ])),
+                  ),
+                ])),
           )
         ],
       ),

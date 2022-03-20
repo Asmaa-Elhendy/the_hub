@@ -4,6 +4,10 @@ import 'package:the_hub/controller/supplier_controller.dart';
 import 'package:the_hub/controller/theme_controller.dart';
 import 'package:the_hub/view/screens/good_receipt_note_screens.dart';
 import 'package:the_hub/view/widgets/drawer_page.dart';
+import 'package:the_hub/view/widgets/drawer_page.dart';
+import 'package:the_hub/view/widgets/drawer_page.dart';
+import 'package:the_hub/view/widgets/drawer_page.dart';
+import 'package:the_hub/view/widgets/drawer_page.dart';
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
 

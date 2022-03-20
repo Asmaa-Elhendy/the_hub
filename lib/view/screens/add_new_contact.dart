@@ -23,7 +23,10 @@ class _AddNewContactState extends State<AddNewContact> {
    final emailController = TextEditingController();
 
    final shippingAddressController = TextEditingController();
+   final nameController = TextEditingController();
+
    String mobile ="";
+   String name = "";
    String alternativeNum="";
    String email="";
    String landLine="";
@@ -39,6 +42,8 @@ class _AddNewContactState extends State<AddNewContact> {
    @override
    void initState() {
      mobileController.addListener(updateMobile);
+     nameController.addListener(updateName);
+
      emailController.addListener(updateEmail);
      alternateContactNumberController.addListener(updateAltern);
      landLineController.addListener(updateLandline);
@@ -109,7 +114,7 @@ class _AddNewContactState extends State<AddNewContact> {
                              key: formKey,                        child: Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
                            children: [
-                             Text("Mobile",
+                             Text("Supplier name",
                                style: TextStyle(
                                    fontSize: 14,
                                    fontWeight: FontWeight.w700,
@@ -118,9 +123,9 @@ class _AddNewContactState extends State<AddNewContact> {
                              ),
 
                              AddContactTextField(
-                               controller: mobileController,
-                               labelTextContent: "Mobile",
-                               icon: Icons.phone_android_sharp,
+                               controller: nameController,
+                               labelTextContent: "Name",
+                               icon: Icons.person,
 
                              ),
                              SizedBox(height: height * .025,),
@@ -235,6 +240,7 @@ class _AddNewContactState extends State<AddNewContact> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     buttonOpject.moreInfoButton(formKey1: formKey,formKey2: formKey2,
+                        name: nameController.text==""?null:name,
                         mobile: mobileController.text==""?null:mobile,
                         email:emailController.text==""?null:email,
                         alternateContactNumber: alternateContactNumberController.text==""?null:alternativeNum,
@@ -249,6 +255,7 @@ class _AddNewContactState extends State<AddNewContact> {
                       // email: emailController!=null?emailController.text:null,
                       // shippingAddress: shippingAddressController!=null?shippingAddressController.text:null,
                       // landLiner: landLineController!=null?landLineController.text:null
+                      name: nameController.text==""?null:name,
                       mobile: mobileController.text==""?null:mobile,
                       email:emailController.text==""?null:email,
                       alternateContactNumber: alternateContactNumberController.text==""?null:alternativeNum,
@@ -337,6 +344,16 @@ class _AddNewContactState extends State<AddNewContact> {
          shippiingAdress = shippingAddressController.text;
        }else{
          shippiingAdress="";
+       }
+     });
+  }
+
+  void updateName() {
+     setState(() {
+       if(nameController.text!=""){
+         name = nameController.text;
+       }else{
+         name = "";
        }
      });
   }

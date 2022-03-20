@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_hub/controller/login_controller.dart';
+import 'package:the_hub/view/screens/welcom_screen.dart';
 import 'package:the_hub/view/widgets/alertmessage.dart';
 import 'package:the_hub/view/widgets/login_textfield.dart';
 
@@ -41,7 +42,7 @@ class _LoginState extends State<Login> {
           body: SingleChildScrollView(
             child: Container(
               width: width,
-              height: height-height*.04, //*****************
+              height: height-height*0.04,
               color: widget.theme.backgroundColor,
               child: Stack(
                 children: [
@@ -91,7 +92,7 @@ class _LoginState extends State<Login> {
                                 onTap: () async {
                                   if (_formKey.currentState!.validate()){
                                  await    Helper.login(usernamecontroller.text,passwordcontroller.text);
-                              Helper.errormesssage=='no'?  Get.off(GoodReceiptNote()):Alertmessage(context,Helper.errormesssage,widget.theme,width,height);
+                              Helper.errormesssage=='no'?  Get.off(Welcome()):Alertmessage(context,Helper.errormesssage,widget.theme,width,height);
                                   }
                                 },
                                 child: Container(

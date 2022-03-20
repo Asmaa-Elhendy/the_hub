@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class BusinessLocatioDropBox extends StatefulWidget {
- List<String> business_locations_names;
- BusinessLocatioDropBox({required this.business_locations_names});
+  List<String> business_locations_names;
+  BusinessLocatioDropBox({required this.business_locations_names});
 
   @override
   _BusinessLocatioDropBoxState createState() => _BusinessLocatioDropBoxState();
 }
 
 class _BusinessLocatioDropBoxState extends State<BusinessLocatioDropBox> {
-   String? initialValue;
+  String? initialValue;
   var items = [
     'Item 1',
     'Item 2',

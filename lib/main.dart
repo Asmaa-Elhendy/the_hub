@@ -2,7 +2,6 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:the_hub/controller/local_storage.dart';
 import 'package:the_hub/controller/theme_controller.dart';
 import 'package:the_hub/view/screens/login.dart';
 import 'package:the_hub/view/screens/welcom_screen.dart';
@@ -14,7 +13,6 @@ void main() async{
   await GetStorage.init();
   GetStorage storage =GetStorage();
   var exist = await storage.read("token");
-  print(exist);
  // var exist = prefrences.getString("token");
 
 

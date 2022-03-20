@@ -16,6 +16,7 @@ class AddContactTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       validator: (value) {
         if (labelTextContent == 'Email') {
           if (EmailValidator.validate(value!)) {

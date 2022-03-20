@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:the_hub/controller/supplier_controller.dart';
 import 'package:the_hub/view/screens/good_receipt_note_screens.dart';
 
-Alert(BuildContext context, double width, double height,{String? mobile,
+Alert(BuildContext context, double width, double height,{
+  String? mobile,
+  String? name,
   String? alternateContactNumber,
-
   String? landLiner,
   String? email,
   String? shippingAddress,
@@ -66,12 +67,15 @@ Alert(BuildContext context, double width, double height,{String? mobile,
                                 opening_balance: openingBalance,
                                 pay_term: pay_term_type,
                                 shipping_address: shippingAddress,
-                                tax_number: tax
+                                tax_number: tax,
+                                name: name,
                             );
                             //Navigator.of(context).pop();
-                            SupplierHelper.getSupplier();
-                            Navigator.pushReplacement(
-                                context, MaterialPageRoute(builder: (BuildContext context) => GoodReceiptNote()));
+                            //SupplierHelper.getSupplier();
+                            Navigator.pushAndRemoveUntil(
+                                context, MaterialPageRoute(builder: (BuildContext context) => GoodReceiptNote()),
+                                  (Route<dynamic> route) => false,
+                            );
                           },
                           child: const Text(
                             'Add',

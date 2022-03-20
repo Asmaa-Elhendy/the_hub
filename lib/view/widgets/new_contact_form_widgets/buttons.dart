@@ -18,7 +18,9 @@ class ButtonsWidgets{
 
   Widget saveButton({formKey1,formKey2,
     String? mobile,
-  String? alternateContactNumber,
+    String? name,
+
+    String? alternateContactNumber,
 
   String? landLiner,
   String? email,
@@ -76,7 +78,7 @@ class ButtonsWidgets{
               Alert(
                   context,width,height,openingBalance: openingBalance,pay_term_type: pay_term_type,zip_Or_postal: zip_Or_postal,
                   state: state,country: country,city: city,tax: tax,address_2: address_2,address_1: address_1,landLiner: landLiner,
-                  shippingAddress: shippingAddress,alternateContactNumber: alternateContactNumber,email: email,mobile: mobile
+                  shippingAddress: shippingAddress,alternateContactNumber: alternateContactNumber,email: email,mobile: mobile,name: name
               );
             }
           }
@@ -84,7 +86,7 @@ class ButtonsWidgets{
             Alert(
               context,width,height,openingBalance: openingBalance,pay_term_type: pay_term_type,zip_Or_postal: zip_Or_postal,
             state: state,country: country,city: city,tax: tax,address_2: address_2,address_1: address_1,landLiner: landLiner,
-            shippingAddress: shippingAddress,alternateContactNumber: alternateContactNumber,email: email,mobile: mobile
+            shippingAddress: shippingAddress,alternateContactNumber: alternateContactNumber,email: email,mobile: mobile,name: name
           );
           }
         }, child: Text("Save",
@@ -98,6 +100,7 @@ class ButtonsWidgets{
   }
   Widget moreInfoButton({formKey1,formKey2,
     String? mobile,
+    String? name,
     String? alternateContactNumber,
     String? landLiner,
     String? email,
@@ -122,11 +125,7 @@ class ButtonsWidgets{
                 context,
                 MaterialPageRoute(
                     builder: (context) => AdditionalNewContactData(theme:theme,
-                      // mobile: mobile!=null?mobile:null,
-                      // alternativeNum: alternativeNum!=null?alternativeNum:null,
-                      // email: email,
-                      // landline: landline,
-                      // shippngAddress: shippngAddress,
+                      name: name,
                       mobile: mobile,
                       alternativeNum: alternateContactNumber,
                       shippngAddress: shippingAddress,

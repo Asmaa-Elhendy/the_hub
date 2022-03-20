@@ -16,25 +16,25 @@ class _LoginTextFieldState extends State<LoginTextField> {
     return TextFormField(
       obscureText: widget.label=='password'?isShow?false:true:false,
       controller: widget.controller ,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter the ${widget.label}';
-          }
-          return null;
-        },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter the ${widget.label}';
+        }
+        return null;
+      },
       decoration: InputDecoration(
 
-        prefixIcon: widget.label=="username"?Icon(Icons.person):Icon(Icons.lock),
-        suffixIcon: widget.label=='password'?IconButton(onPressed: (){
-          setState(() {
-            isShow=!isShow;
-          });
-        }, icon: Icon(isShow?Icons.remove_red_eye_outlined:Icons.remove_red_eye)):null,
-        hintText: widget.label=="username"?"Enter your username":"Enter your password",
-        contentPadding: EdgeInsets.all(MediaQuery.of(context).size.height*.01),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15)
-        )
+          prefixIcon: widget.label=="username"?Icon(Icons.person):Icon(Icons.lock),
+          suffixIcon: widget.label=='password'?IconButton(onPressed: (){
+            setState(() {
+              isShow=!isShow;
+            });
+          }, icon: Icon(isShow?Icons.remove_red_eye_outlined:Icons.remove_red_eye)):null,
+          hintText: widget.label=="username"?"Enter your username":"Enter your password",
+          contentPadding: EdgeInsets.all(MediaQuery.of(context).size.height*.01),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15)
+          )
       ),
     );
   }

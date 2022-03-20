@@ -6,8 +6,9 @@ import 'package:the_hub/model/supplier_model.dart';
 import 'package:the_hub/view/screens/add_new_contact.dart';
 
 class SupplierDropbox extends StatefulWidget {
+
   ThemeData theme;
-  SupplierDropbox({Key? key,required this.theme}) : super(key: key);
+   SupplierDropbox({Key? key,required this.theme}) : super(key: key);
 
   @override
   _SupplierDropboxState createState() => _SupplierDropboxState();
@@ -16,13 +17,23 @@ class SupplierDropbox extends StatefulWidget {
 class _SupplierDropboxState extends State<SupplierDropbox> {
 
   TextEditingController _supplierController = TextEditingController();
-  List items =[];
+   List items = [];
+
   // getSuppliers_names();
+  getitem() async{
+    items = await SupplierHelper.getSupplier();
+  }
+
 
   @override
   void initState() {
     super.initState();
     SupplierHelper.getSupplier();
+   //items= getSuppliers_names();
+    getitem();
+
+      print("itttt $items");
+   // items=[];
     // items = getSuppliers_names();
 
   }
@@ -37,7 +48,9 @@ class _SupplierDropboxState extends State<SupplierDropbox> {
           onTap: (){
             SupplierHelper.getSupplier();
             setState(() {
-              items = getSuppliers_names();
+               //items = getSuppliers_names();
+              getitem();
+              print("supp $items");
 
             });
           },
@@ -77,10 +90,10 @@ class _SupplierDropboxState extends State<SupplierDropbox> {
                 ),
                 child: IconButton(
                   icon:
-                  Icon (Icons.add_circle,
-                    color: widget.theme.backgroundColor,
-                    size: MediaQuery.of(context).size.width * 0.05,
-                  ),
+                 Icon (Icons.add_circle,
+                   color: widget.theme.backgroundColor,
+                   size: MediaQuery.of(context).size.width * 0.05,
+                 ),
                   onPressed: () {
                     Get.to(AddNewContact(theme :widget.theme));
                     // Navigator.push(
@@ -115,11 +128,12 @@ class _SupplierDropboxState extends State<SupplierDropbox> {
       );
   }
 
-  List getSuppliers_names() {
-    List items =[];
-    for(int i=0;i<SupplierHelper.suppliers.length;i++){
-      items.add(SupplierHelper.suppliers[i].name);
-    }
-    return items;
-  }
+  //  getSuppliers_names() async {
+  //  List  ll = await SupplierHelper.getSupplier();
+  //   List items =[];
+  //   for(int i=0;i<ll.length;i++){
+  //     items.add(ll[i].name);
+  //   }
+  //   return items;
+  // }
 }

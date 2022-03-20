@@ -5,14 +5,14 @@ import 'package:the_hub/view/widgets/new_contact_form_widgets/textfield.dart';
 class AdditionalNewContactData extends StatefulWidget {
   static ValueNotifier<String> selectedValue =ValueNotifier("");
 
-
+String?name;
   String? mobile;
     String? alternativeNum;
     String? landline;
     String? email;
     String? shippngAddress;
 
-   AdditionalNewContactData({Key? key,required this.theme,this.email,this.mobile,this.alternativeNum,this.landline,this.shippngAddress}) : super(key: key);
+   AdditionalNewContactData({Key? key,required this.theme,this.email,this.mobile,this.alternativeNum,this.landline,this.shippngAddress,this.name}) : super(key: key);
    ThemeData theme;
 
   @override
@@ -257,6 +257,7 @@ class _AdditionalNewContactDataState extends State<AdditionalNewContactData> {
                     children: [
                       buttonOpject.backButton(),
                       buttonOpject.saveButton(
+                        name: widget.name,
                         mobile: widget.mobile,
                         landLiner: widget.landline,
                         email: widget.email,
