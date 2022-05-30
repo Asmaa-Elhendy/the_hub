@@ -4,7 +4,7 @@ import 'package:the_hub/controller/login_controller.dart';
 import 'package:the_hub/view/screens/welcom_screen.dart';
 import 'package:the_hub/view/widgets/alertmessage.dart';
 import 'package:the_hub/view/widgets/login_textfield.dart';
-
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'good_receipt_note_screens.dart';
 
 class Login extends StatefulWidget {
@@ -90,9 +90,11 @@ class _LoginState extends State<Login> {
                             child: Center(
                               child: InkWell(
                                 onTap: () async {
+                                  Loader.show(context,progressIndicator:LinearProgressIndicator());
                                   if (_formKey.currentState!.validate()){
                                  await    Helper.login(usernamecontroller.text,passwordcontroller.text);
                               Helper.errormesssage=='no'?  Get.off(Welcome()):Alertmessage(context,Helper.errormesssage,widget.theme,width,height);
+                                 Loader.hide();
                                   }
                                 },
                                 child: Container(

@@ -5,6 +5,9 @@ import 'package:the_hub/model/item_model.dart';
 import 'package:the_hub/view/widgets/alert.dart';
 import 'package:the_hub/view/widgets/custom_item_card.dart';
 
+import '../../model/inventory_item.dart';
+import '../widgets/inventory_alerts.dart';
+
 
 class ScanAndDisplay extends StatefulWidget {
    ScanAndDisplay({Key? key,required this.theme}) : super(key: key);
@@ -89,6 +92,8 @@ class _ScanAndDisplayState extends State<ScanAndDisplay> {
                                       barcodevalue=barcodeScanRes;
                                  barcodevalue=='-1'?textcontroller.text='': textcontroller.text=barcodevalue;
                                       print("asmaa ${value}");
+                               //       barcodevalue=='-1'? Container():Alertinventory(context,width,height,widget.theme,barcodevalue,addInventoryItem);
+                                      barcodevalue=='-1'? Container():canedit( context, width , height, widget.theme, barcodevalue, '4');
                                     });
                                   },
                                   child: Image.asset("assets/images/barcodenew.png",),
@@ -131,4 +136,9 @@ class _ScanAndDisplayState extends State<ScanAndDisplay> {
       ),
     );
   }
+ addInventoryItem(InventoryItem item){
+   setState(() {
+
+   });
+ }
 }

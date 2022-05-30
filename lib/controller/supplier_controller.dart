@@ -23,7 +23,7 @@ class SupplierHelper{
    GetStorage storage =GetStorage();
    var token = await storage.read("token");
     String bizname = await getBusinessname();
-    var response = await http.get(Uri.parse("http://svpos.smartqr.app/connector/api/contactapi?type=supplier&biz_name=$bizname"),
+    var response = await http.get(Uri.parse("http://svpos.smartqr.app/connector/api/contactapi?type=supplier&biz_name=$bizname&per_page=-1"),
 
       headers: {
         "Content-Type": "application/json",

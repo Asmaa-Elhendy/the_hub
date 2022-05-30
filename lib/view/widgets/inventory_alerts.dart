@@ -8,6 +8,7 @@ Alertinventory(BuildContext context,double width , double height,ThemeData theme
       context: context,
       builder: (context) {
         TextEditingController textcontroller=TextEditingController();
+        TextEditingController nametextcontroller=TextEditingController();
     return AlertDialog(
         title: Center(child: Text("Add New Item")),
         content:SingleChildScrollView(
@@ -23,6 +24,16 @@ Alertinventory(BuildContext context,double width , double height,ThemeData theme
                       SizedBox(width: width*.05,),
                       Text('kk${barcode}')
                     ],
+                  ),
+                ), SizedBox(height: height*.01,),
+                TextFormField(
+                  controller: nametextcontroller,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(height*.026),
+                    prefixIcon: Icon(Icons.drive_file_rename_outline,color: Colors.black,size: width*.087,),
+                    hintText: "Enter Name",
+
                   ),
                 ),
                 SizedBox(height: height*.01,),
@@ -65,6 +76,7 @@ EditAlertinventory(BuildContext context,double width , double height,ThemeData t
       context: context,
       builder: (context) {
         TextEditingController textcontroller=TextEditingController();
+        TextEditingController nametextcontroller=TextEditingController();
         textcontroller..text=quantity;
         return AlertDialog(
           title: Column(
@@ -86,6 +98,16 @@ EditAlertinventory(BuildContext context,double width , double height,ThemeData t
                         Text('kk${barcode}')
                       ],
                     ),
+                  ), SizedBox(height: height*.01,),
+                  TextFormField(
+                    controller: nametextcontroller,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(height*.026),
+                      prefixIcon: Icon(Icons.drive_file_rename_outline,color: Colors.black,size: width*.087,),
+                      hintText: "Enter Name",   //name from api
+
+                    ),
                   ),
                   SizedBox(height: height*.01,),
                   TextFormField(
@@ -103,12 +125,15 @@ EditAlertinventory(BuildContext context,double width , double height,ThemeData t
             ),
           ),
           actions: [
-            Center(
-              child: Container(
-                width: width*.3,
-                height: height*.06,
-                color: themeData.backgroundColor,
-                child: Center(child:Text('Edit',style: TextStyle(fontSize:17,color: Colors.white),)),
+            GestureDetector(
+              onTap: (){Navigator.pop(context);},
+              child: Center(
+                child: Container(
+                  width: width*.3,
+                  height: height*.06,
+                  color: themeData.backgroundColor,
+                  child: Center(child:Text('Edit',style: TextStyle(fontSize:17,color: Colors.white),)),
+                ),
               ),
             )
           ],
@@ -133,6 +158,7 @@ canedit(BuildContext context,double width , double height,ThemeData themeData, b
         children: [
         InkWell(
           onTap: (){
+            Navigator.pop(context);
             EditAlertinventory(context,width,height,themeData,barcode,quantity);
           },
           child: Container(
