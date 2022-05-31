@@ -14,6 +14,8 @@ import 'package:the_hub/view/widgets/purchaseorder_textfield.dart';
 import 'package:the_hub/view/widgets/receiptnote_textfield.dart';
 import 'package:the_hub/view/widgets/supplier_textfield.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+
 
 
 
@@ -26,32 +28,23 @@ class GoodReceiptNote extends StatefulWidget {
 class _GoodReceiptNoteState extends State<GoodReceiptNote> {
 
   var _formkey = GlobalKey<FormState>();
-  String _fileName = '...';
+  String? _fileName;
   List<String>  businessLocationsNames=[];
-  //List suppliers=[];
+  PickedFile? imageFile;
+
 
 
   getbusinessLocationName()async{
     List<String>  business_locations_names=  await  ExperApi.GetBusinessLocationsNames();
     businessLocationsNames=business_locations_names;
-    if (mounted) setState(() {
+    setState(() {
 
-    });;
+    });
   }
-  // List getSuppliers_names() {
-  //   List items =[];
-  //   for(int i=0;i<SupplierHelper.suppliers.length;i++){
-  //     items.add(SupplierHelper.suppliers[i].name);
-  //   }
-  //   print(" suppl $suppliers");
-  //   return items;
-  // }
 
   @override
   void initState() {
     super.initState();
-    SupplierHelper.getSupplier();
-    //suppliers = getSuppliers_names();
     getbusinessLocationName();
   }
 
@@ -153,10 +146,7 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                                     fontWeight: FontWeight.w500,
                                                     color: Colors.grey[700])
                                             ),
-                                            // TextSpan(
-                                            //   text: " to add",
-                                            //   style: TextStyle(color: Colors.black)
-                                            // ),
+
                                             WidgetSpan(
                                               child: Icon(Icons.announcement, size: 18,color: Colors.cyan,),
                                             ),
@@ -210,10 +200,7 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                                     fontWeight: FontWeight.w500,
                                                     color: Colors.grey[700])
                                             ),
-                                            // TextSpan(
-                                            //   text: " to add",
-                                            //   style: TextStyle(color: Colors.black)
-                                            // ),
+
                                             WidgetSpan(
                                               child: Icon(Icons.announcement, size: 18,color: Colors.cyan,),
                                             ),
@@ -233,7 +220,12 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                           children: [
-                                            Expanded(child:Text(_fileName)),
+                                            _fileName==null?Text("Attach File/Image"):Expanded(child:Text(_fileName!)),
+
+
+                                            // imageFile == null?Expanded(child:Text(_fileName!)):Expanded(child: Text(imageFile!.path)),
+
+
                                             Container(
                                               margin: EdgeInsets.only(left: 8),
                                               decoration: BoxDecoration(
@@ -241,28 +233,167 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                               ),
                                               child: IconButton(
                                                   onPressed: () async{
-                                                    final result = await FilePicker.platform.pickFiles();
-                                                    if(result == null) {
-                                                      return;
-                                                    }
-                                                    final file = result.files.first;
-                                                    final f = File("${file.path}");
-                                                    int sizeInBytes = f.lengthSync();
-                                                    double sizeInMb = sizeInBytes / (1024 * 1024);
-                                                    if (sizeInMb > 5){
-                                                      print("this file too big");
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            backgroundColor: Colors.grey[100],
+                                                            actions: [
+                                                              Container(
+                                                                height: height * 0.182,
+                                                                child: Container(
+                                                                  child: Center(
+                                                                    child: Column(
+                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                      children: [
 
-                                                      return;
-                                                      // This file is Longer the
-                                                    }
+                                                                        Expanded(
+                                                                          child: ElevatedButton(onPressed: (){
+                                                                            _openCamera(context);
+                                                                            setState((){
+                                                                              if(imageFile!=null){
+                                                                                _fileName = imageFile!.path;
+                                                                              }
+                                                                            });
+                                                                            Navigator.of(context).pop(context);
+                                                                          },
+                                                                            // style: ButtonStyle(
+                                                                            //     // shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(35),),),
+                                                                            //    ElevatedButton.styleFrom(side: BorderSide(width: 5.0, color: Colors.blue,)),
+                                                                            //
+                                                                            // ),
+                                                                            style: ElevatedButton.styleFrom(
+                                                                              primary: Colors.white,
+                                                                              side: BorderSide( color: Colors.blue,),
+                                                                              shape: RoundedRectangleBorder(
+                                                                                borderRadius:  BorderRadius.circular(30.0),
+                                                                              ),
+                                                                            ),
+                                                                            child: RichText(
+                                                                              text: TextSpan(
+                                                                                children: [
+                                                                                  WidgetSpan(
+                                                                                    child: Icon(Icons.camera_alt_rounded, size: 18,color: Colors.cyan,),
+                                                                                  ),
+                                                                                  TextSpan(
+                                                                                      text: " Open Camera",
+                                                                                      style: TextStyle(
+                                                                                          fontSize: 16,
+                                                                                          fontWeight: FontWeight.w400,
+                                                                                          color: Colors.grey[900])
+                                                                                  ),
 
-                                                    openFile(file);
-                                                    final newFile = await saveFile(file);
-                                                    print("from path:${file.path!}");
-                                                    print("to path:${newFile.path }");
-                                                    setState(() {
-                                                      _fileName = file.name;
-                                                    });
+
+                                                                                ],
+                                                                              ),
+                                                                            ),),
+                                                                        ),
+                                                                        SizedBox(height: height*0.012,),
+
+
+
+
+                                                                        Expanded(
+                                                                          child: ElevatedButton(
+                                                                            onPressed: () async{
+                                                                              final result = await FilePicker.platform.pickFiles();
+                                                                              if(result == null) {
+                                                                                return;
+                                                                              }
+                                                                              final file = result.files.first;
+                                                                              final f = File("${file.path}");
+                                                                              int sizeInBytes = f.lengthSync();
+                                                                              double sizeInMb = sizeInBytes / (1024 * 1024);
+                                                                              if (sizeInMb > 5){
+                                                                                print("this file too big");
+
+                                                                                return;
+                                                                                // This file is Longer the
+                                                                              }
+
+                                                                              openFile(file);
+                                                                              final newFile = await saveFile(file);
+                                                                              print("from path:${file.path!}");
+                                                                              print("to path:${newFile.path }");
+                                                                              setState(() {
+                                                                                _fileName = file.name;
+                                                                              });
+                                                                              Navigator.of(context).pop();
+
+
+
+
+                                                                            },
+                                                                            child: RichText(
+                                                                              text: TextSpan(
+                                                                                children: [
+                                                                                  WidgetSpan(
+                                                                                    child: Icon(Icons.attach_file, size: 18,color: Colors.cyan,),
+                                                                                  ),
+                                                                                  TextSpan(
+                                                                                      text: "Attach image/file from device",
+                                                                                      style: TextStyle(
+                                                                                          fontSize: 16,
+                                                                                          fontWeight: FontWeight.w400,
+                                                                                          color: Colors.grey[900])
+                                                                                  ),
+
+
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                            style: ElevatedButton.styleFrom(
+                                                                              primary: Colors.white,
+                                                                              side: BorderSide(color: Colors.blue,),
+                                                                              shape: RoundedRectangleBorder(
+                                                                                borderRadius:  BorderRadius.circular(30.0),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        SizedBox(height: height*0.02,),
+
+
+                                                                        Container(
+                                                                          //margin: EdgeInsets.only(left: width * .14),
+                                                                          width: width*.22,
+                                                                          height: height*.033,
+                                                                          child: ElevatedButton(
+                                                                              onPressed: (){
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: const Text(
+                                                                                'Cancel',
+                                                                                style: TextStyle(color: Colors.white),
+                                                                              ),
+                                                                              style: ButtonStyle(
+                                                                                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(35))),
+                                                                                //backgroundColor:
+                                                                                //MaterialStateProperty.all(themeData.backgroundColor),
+                                                                              )
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+
+                                                            ],
+
+
+
+                                                            // child: Container(
+                                                            //   height: height* 0.1,
+                                                            //   width: width * .07,
+                                                            //
+                                                            // ),
+
+                                                          );
+                                                        }
+                                                    );
+
+
                                                   },
                                                   icon: Icon(Icons.add_circle,
                                                     size: MediaQuery.of(context).size.width * 0.05,
@@ -353,6 +484,19 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
       backgroundColor: (Colors.black12),
       duration: Duration(seconds: 4),
     );
+  }
+  void _openCamera(BuildContext context) async {
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+    );
+    setState(() {
+      imageFile = pickedFile;
+      if(imageFile!=null){
+        _fileName = imageFile!.path;
+
+      }
+    });
+
   }
 }
 
@@ -695,4 +839,3 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
 //     );
 //   }
 // }
-
