@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_hub/controller/login_controller.dart';
+import 'package:the_hub/view/screens/detect_business_location.dart';
 import 'package:the_hub/view/screens/welcom_screen.dart';
 import 'package:the_hub/view/widgets/alertmessage.dart';
 import 'package:the_hub/view/widgets/login_textfield.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
+import '../widgets/button.dart';
+import 'access_denied.dart';
 import 'good_receipt_note_screens.dart';
 
 class Login extends StatefulWidget {
@@ -93,26 +96,12 @@ class _LoginState extends State<Login> {
                                   Loader.show(context,progressIndicator:LinearProgressIndicator());
                                   if (_formKey.currentState!.validate()){
                                  await    Helper.login(usernamecontroller.text,passwordcontroller.text);
-                              Helper.errormesssage=='no'?  Get.off(Welcome()):Alertmessage(context,Helper.errormesssage,widget.theme,width,height);
+                          //      Get.off(AccessDenied());
+                            Helper.errormesssage=='no'?  Get.off(BusinessLocation(theme: widget.theme)):Alertmessage(context,Helper.errormesssage,widget.theme,width,height);
                                  Loader.hide();
                                   }
                                 },
-                                child: Container(
-                                  width: width*.6,
-                                  height: height*.05,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: widget.theme.backgroundColor,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 3,
-                                        blurRadius: 3,
-                                        offset: Offset(0, 3), // changes position of shadow
-                                      ),
-                                    ],
-                                  ),child: const Center(child: Text('Login',style: TextStyle(color: Colors.white,fontSize: 17),)),
-                                ),
+                                child:CustomButton(theme: widget.theme,title: 'Login',)
                               ),
                             ),
                           )

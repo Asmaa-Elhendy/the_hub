@@ -1,17 +1,22 @@
 import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-
+String API_URL ="https://svretailmodule.smartqr.app/";
+int client_id= 1;
+String client_secret= "kfgHKyK7iCTfnmNIEC3EQYtAbUqVUZgoP8iUuIfm";
 class Helper {
 static String errormesssage='no';
 
   static login(String username, String passsword) async {
-    var res = await http.post(Uri.parse("https://svpos.smartqr.app/api/login"),
+    var res = await http.post(Uri.parse("${API_URL}oauth/token"),
 
-      headers: {
-        "Accept": "application/json",
-      },
+      // headers: {
+      //   "Accept": "application/json",
+      // },
       body: {
+      "grant_type":"password",
+      "client_id":"$client_id",
+        "client_secret":client_secret,
         "username": username,
         "password": passsword
       },
@@ -35,7 +40,7 @@ static messageFunc(int responseCode, String resbody, bool auth) {
     case 200:
     case 201:
       {
-        auth ? saveToken(json.decode(resbody)['token']) : Helper.errormesssage = 'no';
+        auth ? saveToken(json.decode(resbody)['access_token']) : Helper.errormesssage = 'no';
         print(responseCode);
       }
       break;

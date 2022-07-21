@@ -5,6 +5,8 @@ import 'package:the_hub/controller/supplier_controller.dart';
 import 'package:the_hub/model/supplier_model.dart';
 import 'package:the_hub/view/screens/add_new_contact.dart';
 
+import 'access_alert.dart';
+
 class SupplierDropbox extends StatefulWidget {
 
   ThemeData theme;
@@ -95,7 +97,9 @@ class _SupplierDropboxState extends State<SupplierDropbox> {
                    size: MediaQuery.of(context).size.width * 0.05,
                  ),
                   onPressed: () {
-                    Get.to(AddNewContact(theme :widget.theme));
+                    bool permission_access_new_supplier=false;
+                 permission_access_new_supplier==false?AceesssAlert(context, width , height,widget.theme,"you don\'t have access to add supplier")
+                     :Get.to(AddNewContact(theme :widget.theme));
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(

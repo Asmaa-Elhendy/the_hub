@@ -6,6 +6,8 @@ import 'dart:io';
 
 import 'package:the_hub/view/widgets/inventory_alerts.dart';
 
+import 'list_and_scan.dart';
+
 class Inventory extends StatefulWidget {
 ThemeData theme;
 Inventory({required this.theme});

@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:the_hub/controller/exper_api.dart';
 import 'package:the_hub/controller/supplier_controller.dart';
 import 'package:the_hub/controller/theme_controller.dart';
+import 'package:the_hub/view/screens/list_and_scan.dart';
 import 'package:the_hub/view/screens/scan_and_display.dart';
 import 'package:the_hub/view/widgets/businesslocation_dropbox.dart';
 import 'package:the_hub/view/widgets/datepicker.dart';
@@ -20,7 +21,8 @@ import 'package:image_picker/image_picker.dart';
 
 
 class GoodReceiptNote extends StatefulWidget {
-
+  bool already_select_supplier;
+  GoodReceiptNote({this.already_select_supplier=false});
   @override
   _GoodReceiptNoteState createState() => _GoodReceiptNoteState();
 }
@@ -29,24 +31,26 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
 
   var _formkey = GlobalKey<FormState>();
   String? _fileName;
-  List<String>  businessLocationsNames=[];
+  // List<String>  businessLocationsNames=[];
   PickedFile? imageFile;
+  DateTime orderDate=DateTime(2022,7,30);
+  bool permission_receive_earlier_order_date=true;
 
 
 
-  getbusinessLocationName()async{
-    List<String>  business_locations_names=  await  ExperApi.GetBusinessLocationsNames();
-    businessLocationsNames=business_locations_names;
-    setState(() {
+  // getbusinessLocationName()async{
+  //   List<String>  business_locations_names=  await  ExperApi.GetBusinessLocationsNames();
+  //   businessLocationsNames=business_locations_names;
+  //   setState(() {
+  //
+  //   });
+  // }
 
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getbusinessLocationName();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getbusinessLocationName();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -103,12 +107,12 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                               ),
 
                               Padding(
-                                padding: EdgeInsets.symmetric(vertical: height*0.01,horizontal: width * 0.03),
+                                padding: EdgeInsets.symmetric(vertical: height*0.02,horizontal: width * 0.03),
                                 child: Container(
                                   //width: double.infinity,
 
                                   //  height: height*.76,
-                                  padding: EdgeInsets.only(top: height*0.01,left: width * 0.04,right: width *  0.04),
+                                  padding: EdgeInsets.only(top: height*0.015,left: width * 0.04,right: width *  0.04),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
                                       boxShadow: [
@@ -124,37 +128,37 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("Supplier:*",
+                                  widget.already_select_supplier==false?Text("Supplier:*",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.grey[700]
                                         ),
-                                      ),
+                                      ):SizedBox(),
                                       Form(
                                           key: _formkey,
 
-                                          child: SupplierDropbox(theme:themecontroller.selectedTheme)),
-                                      SizedBox(height: height * .025,),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                                text: "Business Location :  ",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.grey[700])
-                                            ),
-
-                                            WidgetSpan(
-                                              child: Icon(Icons.announcement, size: 18,color: Colors.cyan,),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      BusinessLocatioDropBox(business_locations_names: businessLocationsNames,),
-                                      SizedBox(height: height * .025,),
+                                          child:  widget.already_select_supplier==false?
+                                          SupplierDropbox(theme:themecontroller.selectedTheme):SizedBox(),),
+                                      SizedBox(height: height * .029,),
+                                      // RichText(
+                                      //   text: TextSpan(
+                                      //     children: [
+                                      //       TextSpan(
+                                      //           text: "Business Location :  ",
+                                      //           style: TextStyle(
+                                      //               fontSize: 16,
+                                      //               fontWeight: FontWeight.w500,
+                                      //               color: Colors.grey[700])
+                                      //       ),
+                                      //
+                                      //       WidgetSpan(
+                                      //         child: Icon(Icons.announcement, size: 18,color: Colors.cyan,),
+                                      //       ),
+                                      //     ],
+                                      //   ),
+                                      // ),
+                                      //BusinessLocatioDropBox(business_locations_names: businessLocationsNames,),
                                       Text("Purchase Order: ",
                                         style: TextStyle(
                                             fontSize: 16,
@@ -166,7 +170,7 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                         child: PurchaseOrderTextField(),
 
                                       ),
-                                      SizedBox(height: height * .025,),
+                                      SizedBox(height: height * .029,),
                                       RichText(
                                         text: TextSpan(
                                           children: [
@@ -189,7 +193,7 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                       ),
                                       ReceiptNoteTextField(),
 
-                                      SizedBox(height: height * .025,),
+                                      SizedBox(height: height * .029,),
                                       RichText(
                                         text: TextSpan(
                                           children: [
@@ -411,7 +415,7 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                             color: Colors.grey[600]
                                         ),
                                       ),
-                                      SizedBox(height: height * .025,),
+                                      SizedBox(height: height * .029,),
 
                                       Text("Order Date:",
                                         style: TextStyle(
@@ -420,8 +424,8 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                                             color: Colors.grey[700]
                                         ),
                                       ),
-                                      DatePicker(),
-                                      SizedBox(height: height * .02,),
+                                      DatePicker(orderdate: orderDate,),
+                                      SizedBox(height: height * .044,),
                                     ],
                                   ),
                                 ),
@@ -432,13 +436,31 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
                           ),
                         ),
                       ),
-                      Positioned(top:height*.82,child:  Padding(
+                      Positioned(top:widget.already_select_supplier==false?height*.75:height*.7,child:  Padding(
                         padding:  EdgeInsets.symmetric(horizontal: width*.34),
                         child: FlatButton(onPressed: () {
-                          if (_formkey.currentState!.validate()) {
-                            Get.to(ScanAndDisplay(theme: themecontroller.selectedTheme,));
+                          DateTime now=DateTime.now();
+                      bool isbefore=  orderDate.isBefore(now);
+                          if (_formkey.currentState!.validate()&&isbefore==true||_formkey.currentState!.validate()&&permission_receive_earlier_order_date==true) {
+                            //Get.to(ScanAndDisplay(theme: themecontroller.selectedTheme,));
+                            Get.to(ListAndScan(theme: themecontroller.selectedTheme,));
                           }
+                          else{
+                            var snackBar = SnackBar(
+                              content: Row(
+                                children: [
+                                  Icon(Icons.error_outline,color: Colors.red,),
+                                  SizedBox(width: width*.01,),
+                                  Text('purchase order date before today !'),
+                                ],
+                              ),
+                              action: SnackBarAction(label: "ok", onPressed: (){
 
+                              }),
+                            );
+
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          }
                         },
                           child: RichText(
                             text: TextSpan(
@@ -478,13 +500,13 @@ class _GoodReceiptNoteState extends State<GoodReceiptNote> {
     return File(file.path!).copy(newFile.path);
 
   }
-  Widget snackbarWidget(){
-    return SnackBar(
-      content: Text('Yay! A SnackBar!'),
-      backgroundColor: (Colors.black12),
-      duration: Duration(seconds: 4),
-    );
-  }
+  // Widget snackbarWidget(){
+  //   return SnackBar(
+  //     content: Text('Yay! A SnackBar!'),
+  //     backgroundColor: (Colors.black12),
+  //     duration: Duration(seconds: 4),
+  //   );
+  // }
   void _openCamera(BuildContext context) async {
     final pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,

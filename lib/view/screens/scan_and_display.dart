@@ -20,12 +20,12 @@ class _ScanAndDisplayState extends State<ScanAndDisplay> {
  String barcodevalue='-1';
  TextEditingController textcontroller=TextEditingController();
  LocalStorage localStorage=LocalStorage();
-  List<Item> items=[
-    Item(name: "Elmarai Full cream Milk (Bottle)", barcode: "556465", current_stock: 8),
-    Item(name: "pepsi", barcode: "5646216", current_stock: 19),
-    Item(name: "Dina farms", barcode: "5556", current_stock: 20),
-    Item(name: "ahmed tea", barcode: "545454", current_stock: 80)
-  ];
+    List<Item> items=[
+      Item(name: "Elmarai Full cream Milk (Bottle)", barcode: "556465", current_stock: 8,quantity: 100),
+      Item(name: "pepsi", barcode: "5646216", current_stock: 19,quantity: 50),
+      Item(name: "Dina farms", barcode: "5556", current_stock: 20,quantity: 77),
+      Item(name: "ahmed tea", barcode: "545454", current_stock: 80,quantity: 150)
+    ];
 @override
 
   @override
@@ -125,7 +125,7 @@ class _ScanAndDisplayState extends State<ScanAndDisplay> {
                               ),
                             );
                           }
-                          return CustomItemCard(item:items[index],selected_theme: widget.theme,);
+                          return CustomItemCard(item:items[index],selected_theme: widget.theme,remove: (){},);
 
                         }),)
                 ],

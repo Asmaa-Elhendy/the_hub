@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DatePicker extends StatefulWidget {
-  const DatePicker({Key? key}) : super(key: key);
+  DateTime orderdate;
+   DatePicker({Key? key,required this.orderdate}) : super(key: key);
 
   @override
   _DatePickerState createState() => _DatePickerState();
@@ -24,27 +25,11 @@ class _DatePickerState extends State<DatePicker> {
       ),
       child: Row(
         children: [
-          IconButton(
-            icon: Icon(Icons.calendar_today_outlined,
+          Icon(Icons.calendar_today_outlined,
               size: 17,
               color: Colors.grey[600],
-            ) ,
-            onPressed: (){
-              showDatePicker(
-                context:context,
-                firstDate: DateTime(2000),
-                lastDate: DateTime(2040),
-                initialDate: _dateTime?? DateTime.now(),
 
 
-              ).then((date) {
-
-                setState(() {
-                  _dateTime = date;
-                });
-              });
-
-            },
           ),
           VerticalDivider(
             color: Colors.grey,
@@ -53,7 +38,7 @@ class _DatePickerState extends State<DatePicker> {
           SizedBox(
             width: width * 0.03,
           ),
-          _dateTime==null?Text(""):Text("${_dateTime!.day}/${_dateTime!.month}/${_dateTime!.year}",
+          _dateTime==null?Text(""):Text("${widget.orderdate.day}/${widget.orderdate.month}/${widget.orderdate.year}",
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.normal,

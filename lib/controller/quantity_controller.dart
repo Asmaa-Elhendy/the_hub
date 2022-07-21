@@ -5,13 +5,13 @@ import 'package:the_hub/model/item_model.dart';
 class QuantityController extends GetxController{
 
   void increment(Item item){
-    item.default_quantity++;
+    item.quantity++;
     update();
   }
 
   void decrement(Item item){
-   if(item.default_quantity>0){
-     item.default_quantity--;
+   if(item.quantity>0){
+     item.quantity--;
    }
     update();
   }

@@ -81,6 +81,7 @@ flutter:
     - assets/images/storekeeper-clipart-md.png
     - assets/images/man-moving-boxes-clipart-md.png
     - assets/images/delivery-app-svg-clipart-md.png
+    - assets/images/no-stopping.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

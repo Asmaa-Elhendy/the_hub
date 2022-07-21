@@ -10,6 +10,8 @@ import 'package:the_hub/view/screens/inventory.dart';
 import 'package:the_hub/view/screens/login.dart';
 import 'package:the_hub/view/widgets/themes.dart';
 
+import '../screens/chane_lication.dart';
+
 
 class DrawerPage extends StatelessWidget {
   ThemeController themeController;
@@ -148,6 +150,27 @@ class DrawerPage extends StatelessWidget {
             //   padding:  EdgeInsets.only(left: width*0.03),
             //   child:
             // ),
+          ),
+          SizedBox(
+            height: height * 0.01,
+          ),TextButton(
+
+            onPressed: (){
+              Navigator.pop(context);
+              Get.to(ChangeBusinessLocation(theme: themeController.selectedTheme));
+            },
+            child: RichText(
+                text:  TextSpan(children: [
+                  WidgetSpan(child: SizedBox(width: width*.027,)),
+                  WidgetSpan(child: Icon(Icons.location_on_sharp,size: 20,)),
+                  WidgetSpan(child: SizedBox(width: width*.08,)),
+                  TextSpan(
+                    text: "Business Location ",
+
+                    style: TextStyle(fontSize: width*.05, fontWeight: FontWeight.w500,color: Colors.black),
+
+                  ),
+                ])),
           ),
           SizedBox(
             height: height * 0.01,

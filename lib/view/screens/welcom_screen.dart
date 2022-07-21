@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:the_hub/controller/supplier_controller.dart';
 import 'package:the_hub/controller/theme_controller.dart';
-import 'package:the_hub/view/screens/good_receipt_note_screens.dart';
+import 'package:the_hub/view/screens/purchase_order.dart';
 import 'package:the_hub/view/widgets/drawer_page.dart';
-import 'package:the_hub/view/widgets/drawer_page.dart';
-import 'package:the_hub/view/widgets/drawer_page.dart';
-import 'package:the_hub/view/widgets/drawer_page.dart';
-import 'package:the_hub/view/widgets/drawer_page.dart';
+
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
 
@@ -90,7 +87,10 @@ class _WelcomeState extends State<Welcome> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => GoodReceiptNote()));
+                    builder: (context) => Form(
+                      child: PurchaseOrder(),
+
+                    )));
 
           },
           child: Icon(Icons.chevron_right,color: Colors.white,size: 35,),
